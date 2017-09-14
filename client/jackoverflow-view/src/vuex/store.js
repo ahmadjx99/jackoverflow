@@ -101,10 +101,10 @@ const actions = {
     })
   },
   deleteQuestion ({commit}, questionId) {
-    http.delete('/questions' + questionId)
+    http.delete('/questions/' + questionId)
     .then(({data}) => {
-      console.log('data yang di delete', data)
-      commit('removeQuestion', data)
+      console.log('data yang di delete............', data)
+      commit('removeQuestion', questionId)
     })
   },
   signin ({commit}, formSignin) {

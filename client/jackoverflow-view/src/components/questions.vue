@@ -6,8 +6,8 @@
         <div class="col-md-8">
           <div class="list-group">
             <div v-for="question in questions" id="question">
-              <router-link :to="'/questions/' + question.id" class="list-group-item">
-                <h4 class="list-group-item-heading" id="header">{{question.title}}</h4>
+              <div class="list-group-item">
+                <h4 class="list-group-item-heading" id="header"><router-link :to="'/questions/' + question.id">{{question.title}}</router-link></h4>
                 <p class="list-group-item-text">{{questionContentHighlight(question.content)}}</p>
                 <br>
                 <div class="row" id="footer">
@@ -19,11 +19,11 @@
                   <div class="col-md-3">
                     <div id="kanan">
                       <a class="btn btn-sm">edit</a>
-                      <a class="btn btn-sm">delete</a>
+                      <a class="btn btn-sm" @click="deleteQuestion(question.id)">delete</a>
                     </div>
                   </div>
                 </div>
-              </router-link>
+              </div>
             </div>
           </div>
         </div>
@@ -43,7 +43,8 @@ export default {
   },
   methods: {
     ...mapActions([
-      'getAllQuestions'
+      'getAllQuestions',
+      'deleteQuestion'
     ]),
     questionContentHighlight (content) {
       if (content !== null) {
