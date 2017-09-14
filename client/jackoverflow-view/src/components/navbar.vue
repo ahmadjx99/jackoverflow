@@ -16,9 +16,12 @@
         <li><router-link to="/questions">Questions</router-link></li>
         <li><router-link to="/users">Users</router-link></li>
       </ul>
-      <ul class="nav navbar-nav navbar-right">
+      <ul class="nav navbar-nav navbar-right" v-if="token === null">
         <li><router-link to="/signin">Sign In</router-link></li>
         <li><router-link to="/signup">Sign Up</router-link></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right" v-else>
+        <li><a @click="signOut">Sign Out</a></li>
       </ul>
     </div>
   </div>
@@ -27,6 +30,23 @@
 
 <script>
 export default {
+  data () {
+    return {
+      token: ''
+    }
+  },
+  methods: {
+    getToken () {
+      this.token = localStorage.getItem('token')
+    },
+    signOut () {
+      localStorage.removeItem('token')
+      this.$router.push('/')
+    }
+  },
+  created () {
+    this.getToken()
+  }
 }
 </script>
 

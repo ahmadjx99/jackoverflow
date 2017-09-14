@@ -49,7 +49,11 @@ export default {
     ]),
     getIdUser () {
       let token = JSON.parse(localStorage.getItem('token'))
-      return token.id
+      if (token !== null) {
+        return token.id
+      } else {
+        return token
+      }
     }
   },
   created () {
